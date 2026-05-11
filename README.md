@@ -78,9 +78,9 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 │   │   ├── icon-play.png
 │   │   └── icon-collection.png
 │   └── screenshots/
-│       ├── main.png            # hero
-│       ├── search.png
-│       ├── preview.png
-│       └── tagging.png
+│       ├── main.jpg            # hero
+│       ├── search.jpg
+│       ├── preview.jpg
+│       └── tagging.jpg
 └── README.md                   # this file
 ```
