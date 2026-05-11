@@ -313,22 +313,34 @@
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="card rounded-xl p-6">
-          <div class="font-mono text-flame-500 text-sm mb-3">01</div>
+          <div class="flex items-center justify-between mb-4">
+            <img src="/assets/icons/icon-folder.png" alt="" class="w-10 h-10" />
+            <div class="font-mono text-flame-500 text-sm">01</div>
+          </div>
           <h3 class="text-white font-semibold mb-2">Scan your folder</h3>
           <p class="text-white/60 text-sm leading-relaxed">Point Stagehand at your clip drive. Thumbnails, codec info, and existing metadata are imported in one pass.</p>
         </div>
         <div class="card rounded-xl p-6">
-          <div class="font-mono text-flame-500 text-sm mb-3">02</div>
+          <div class="flex items-center justify-between mb-4">
+            <img src="/assets/icons/icon-tag.png" alt="" class="w-10 h-10" />
+            <div class="font-mono text-flame-500 text-sm">02</div>
+          </div>
           <h3 class="text-white font-semibold mb-2">Tag and rate</h3>
           <p class="text-white/60 text-sm leading-relaxed">Add tags across batches. Rate the gems. Group into collections for tonight's set.</p>
         </div>
         <div class="card rounded-xl p-6">
-          <div class="font-mono text-flame-500 text-sm mb-3">03</div>
+          <div class="flex items-center justify-between mb-4">
+            <img src="/assets/icons/icon-search.png" alt="" class="w-10 h-10" />
+            <div class="font-mono text-flame-500 text-sm">03</div>
+          </div>
           <h3 class="text-white font-semibold mb-2">Search and preview</h3>
           <p class="text-white/60 text-sm leading-relaxed">Filter by tag, rating, collection. Loop-preview to confirm vibe before you commit.</p>
         </div>
         <div class="card rounded-xl p-6">
-          <div class="font-mono text-flame-500 text-sm mb-3">04</div>
+          <div class="flex items-center justify-between mb-4">
+            <img src="/assets/icons/icon-play.png" alt="" class="w-10 h-10" />
+            <div class="font-mono text-flame-500 text-sm">04</div>
+          </div>
           <h3 class="text-white font-semibold mb-2">Drag into Resolume</h3>
           <p class="text-white/60 text-sm leading-relaxed">Drop clips straight onto your composition. Use the REST API to pull existing clips back for edits.</p>
         </div>
@@ -344,14 +356,15 @@
         <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">See it in motion</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-3 gap-6">
         <div class="screenshot-frame">
-          <img src="/assets/screenshots/search.png" alt="Searching by tags"
-               onerror="this.parentElement.innerHTML='<div class=&quot;aspect-video flex items-center justify-center text-white/30 text-sm font-mono&quot;>drop search screenshot here</div>'" />
+          <img src="/assets/screenshots/search.png" alt="Searching by tags" loading="lazy" />
         </div>
         <div class="screenshot-frame">
-          <img src="/assets/screenshots/tagging.png" alt="Tagging and collections"
-               onerror="this.parentElement.innerHTML='<div class=&quot;aspect-video flex items-center justify-center text-white/30 text-sm font-mono&quot;>drop tagging screenshot here</div>'" />
+          <img src="/assets/screenshots/preview.png" alt="Inline clip preview" loading="lazy" />
+        </div>
+        <div class="screenshot-frame">
+          <img src="/assets/screenshots/tagging.png" alt="Tagging and collections" loading="lazy" />
         </div>
       </div>
     </div>

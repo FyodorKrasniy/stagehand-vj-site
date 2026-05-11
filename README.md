@@ -25,9 +25,9 @@ npx serve .
 
 Then visit `http://localhost:8000`.
 
-## Add your assets
+## Assets
 
-See [assets/README.txt](assets/README.txt) for exact filenames. Missing images degrade gracefully — the site is safe to deploy with placeholders.
+All assets live in `/assets/`. The hero, screenshots, logo, OG image, favicon, and workflow icons are wired in. Missing images degrade gracefully via `onerror` fallbacks, so swapping in new images is safe.
 
 ## Things to replace before going live
 
@@ -36,7 +36,6 @@ Search the file for these strings and swap them out:
 | Find | Replace with |
 |---|---|
 | `YOUR_FORM_ID` | Your Formspree form ID (free at [formspree.io](https://formspree.io)) |
-| `$XX` | Your beta access price (e.g. `$29`) — currently in `index.html` |
 | `$XX` | Your beta access price (e.g. `$29`) |
 | `https://stagehandvj.example` | Your real domain once you grab one |
 
@@ -69,13 +68,19 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 .
 ├── index.html                  # the entire site
 ├── assets/
-│   ├── README.txt              # which images go where
-│   ├── logo-mark.png           # (you add)
-│   ├── favicon.png             # (you add)
-│   ├── og-image.png            # (you add)
+│   ├── logo-mark.png           # nav + footer logo
+│   ├── favicon.png             # browser tab icon
+│   ├── og-image.png            # social share card (1200x630)
+│   ├── icons/                  # workflow-step icons
+│   │   ├── icon-folder.png
+│   │   ├── icon-tag.png
+│   │   ├── icon-search.png
+│   │   ├── icon-play.png
+│   │   └── icon-collection.png
 │   └── screenshots/
-│       ├── main.png            # (you add)
-│       ├── search.png          # (you add)
-│       └── tagging.png         # (you add)
+│       ├── main.png            # hero
+│       ├── search.png
+│       ├── preview.png
+│       └── tagging.png
 └── README.md                   # this file
 ```
