@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stagehand VJ — The fastest way to organize your VJ library</title>
+  <meta name="description" content="Stagehand VJ is a clip tagging and metadata assistant built for Resolume workflows. Tag, rate, search, and drag clips into Resolume — fast." />
+
+  <meta property="og:title" content="Stagehand VJ — The fastest way to organize your VJ library" />
+  <meta property="og:description" content="Clip tagging and metadata assistant built for Resolume workflows." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.png" />
+
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: {
+              900: '#070708',
+              800: '#0d0d0f',
+              700: '#141417',
+              600: '#1c1c20',
+              500: '#26262b',
+              400: '#3a3a42',
+            },
+            flame: {
+              50:  '#fff4ea',
+              100: '#ffe1c2',
+              300: '#ffae66',
+              400: '#ff8d33',
+              500: '#ff6a1a',
+              600: '#e85400',
+              700: '#b84200',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            glow: '0 0 80px -10px rgba(255, 106, 26, 0.35)',
+            'glow-sm': '0 0 30px -5px rgba(255, 106, 26, 0.4)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(255,106,26,0.10), transparent 60%),
+        radial-gradient(900px 500px at -10% 30%, rgba(255,106,26,0.06), transparent 60%),
+        #070708;
+      color: #e8e8ea;
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 75%);
+    }
+    .text-gradient {
+      background: linear-gradient(180deg, #fff 0%, #b8b8be 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .flame-gradient {
+      background: linear-gradient(90deg, #ff8d33 0%, #ff6a1a 50%, #e85400 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(28,28,32,0.8) 0%, rgba(20,20,23,0.8) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
+    }
+    .card:hover { border-color: rgba(255, 106, 26, 0.35); }
+    .btn-primary {
+      background: linear-gradient(180deg, #ff8d33 0%, #ff6a1a 100%);
+      color: #0a0a0a;
+      font-weight: 700;
+      box-shadow: 0 6px 20px -6px rgba(255,106,26,0.6), inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-ghost:hover { border-color: rgba(255,106,26,0.5); background: rgba(255,106,26,0.06); }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .faq-chevron { transform: rotate(45deg); }
+    .faq-chevron { transition: transform 0.2s ease; }
+    .screenshot-frame {
+      background: linear-gradient(180deg, #1a1a1d 0%, #0e0e10 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 60px -20px rgba(255,106,26,0.15);
+    }
+    .screenshot-frame img { display: block; width: 100%; border-radius: 8px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,106,26,0.1);
+      border: 1px solid rgba(255,106,26,0.3);
+      color: #ffae66; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- ============ NAV ============ -->
+  <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink-900/70 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2.5">
+        <img src="/assets/logo-mark.png" alt="" class="w-8 h-8" onerror="this.style.display='none'" />
+        <span class="font-extrabold tracking-tight text-white">STAGEHAND</span>
+        <span class="text-flame-500 font-extrabold tracking-tight hidden sm:inline">VJ</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-white/70">
+        <a href="#features" class="hover:text-white transition">Features</a>
+        <a href="#workflow" class="hover:text-white transition">How it works</a>
+        <a href="#screenshots" class="hover:text-white transition">Screenshots</a>
+        <a href="#pricing" class="hover:text-white transition">Pricing</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#download" class="hidden sm:inline text-sm text-white/80 hover:text-white">Download</a>
+        <a href="#beta" class="btn-primary px-4 py-2 rounded-lg text-sm">Get Beta Access</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-6 text-center">
+      <span class="badge mb-6"><span class="w-1.5 h-1.5 rounded-full bg-flame-500 animate-pulse"></span> Beta demo available now</span>
+
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
+        <span class="text-gradient">The fastest way to</span><br/>
+        <span class="flame-gradient">organize your VJ library</span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-lg md:text-xl text-white/70 leading-relaxed mb-10">
+        A clip tagging and metadata assistant built for <strong class="text-white">Resolume workflows</strong>. Organize loops, clips, DXV/MOV files, and visual assets with searchable tags, ratings, collections, and live preview — then drag them straight into your composition.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mb-14">
+        <a href="#download" class="btn-primary px-6 py-3.5 rounded-lg text-base inline-flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+          Download Free Demo
+        </a>
+        <a href="#beta" class="btn-ghost px-6 py-3.5 rounded-lg text-base text-white inline-flex items-center justify-center gap-2">
+          Get Beta Access
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+
+      <!-- Hero screenshot -->
+      <div class="max-w-6xl mx-auto">
+        <div class="screenshot-frame">
+          <img src="/assets/screenshots/main.png" alt="Stagehand VJ main interface"
+               onerror="this.parentElement.innerHTML='<div class=&quot;aspect-video flex items-center justify-center text-white/30 text-sm font-mono&quot;>drop main screenshot at /assets/screenshots/main.png</div>'" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STAT STRIP ============ -->
+  <section class="border-y border-white/5 bg-ink-800/40">
+    <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div><div class="text-3xl font-extrabold text-white">DXV</div><div class="text-xs text-white/50 uppercase tracking-wider mt-1">Codec specialised</div></div>
+      <div><div class="text-3xl font-extrabold text-white">REST</div><div class="text-xs text-white/50 uppercase tracking-wider mt-1">Resolume API</div></div>
+      <div><div class="text-3xl font-extrabold text-white">★★★★★</div><div class="text-xs text-white/50 uppercase tracking-wider mt-1">Searchable ratings</div></div>
+      <div><div class="text-3xl font-extrabold text-white">⚡</div><div class="text-xs text-white/50 uppercase tracking-wider mt-1">Local database</div></div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section id="features" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="badge mb-4">Features</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Everything you need for set prep</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">Built by a VJ for VJs. Stagehand fills the gap between your file system and your live composition.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Feature cards -->
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5a2 2 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Tag and rate clips</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Add, remove and edit tags across selected clips. Rate with searchable star ratings so your best loops surface first.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Filter and search</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Search by filename, tags, collections, or combined filters. ALL or ANY matching — find the one clip you need in seconds.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14-7H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Collections & playlists</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Group clips into collections for fast set prep. Build per-gig playlists, then load straight into Resolume.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Inline video preview</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Loop preview clips while reviewing assets. Thumbnails and full playback inside the app — no jumping to Finder/Explorer.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Resolume integration</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Click and drag directly into Resolume compositions, or use the REST API to copy clips out of Resolume to edit and re-tag.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Local database</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Fast searching and organisation against a local index. No cloud, no account — your library stays on your machine.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Relink missing files</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Moved a drive? Renamed a folder? Stagehand detects missing files and lets you relink in one step — without losing tags.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Codec & resolution info</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Detects codec, FPS, alpha, quality, and resolution automatically. Specialised support for DXV — the Resolume native codec.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Metadata export</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Write tags, ratings, artist, year, media-created, and collections directly into file metadata via ExifTool. Survives across apps.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Startup integrity checks</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Check missing files on startup or via Refresh Database. Import existing metadata from files and folders automatically.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Collapsible live view</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Pin a minimal view during live performance. Keep Stagehand on-screen alongside Resolume without stealing real estate.</p>
+        </div>
+
+        <div class="card rounded-xl p-6 transition">
+          <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Drag and drop import</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Import clips by dragging files in or scanning a folder. Stagehand reads metadata, generates thumbnails, and indexes automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORKFLOW ============ -->
+  <section id="workflow" class="py-24 bg-ink-800/30 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="badge mb-4">Workflow</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">From folder to composition in four steps</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card rounded-xl p-6">
+          <div class="font-mono text-flame-500 text-sm mb-3">01</div>
+          <h3 class="text-white font-semibold mb-2">Scan your folder</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Point Stagehand at your clip drive. Thumbnails, codec info, and existing metadata are imported in one pass.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="font-mono text-flame-500 text-sm mb-3">02</div>
+          <h3 class="text-white font-semibold mb-2">Tag and rate</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Add tags across batches. Rate the gems. Group into collections for tonight's set.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="font-mono text-flame-500 text-sm mb-3">03</div>
+          <h3 class="text-white font-semibold mb-2">Search and preview</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Filter by tag, rating, collection. Loop-preview to confirm vibe before you commit.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="font-mono text-flame-500 text-sm mb-3">04</div>
+          <h3 class="text-white font-semibold mb-2">Drag into Resolume</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Drop clips straight onto your composition. Use the REST API to pull existing clips back for edits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section id="screenshots" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="badge mb-4">Screenshots</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">See it in motion</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="screenshot-frame">
+          <img src="/assets/screenshots/search.png" alt="Searching by tags"
+               onerror="this.parentElement.innerHTML='<div class=&quot;aspect-video flex items-center justify-center text-white/30 text-sm font-mono&quot;>drop search screenshot here</div>'" />
+        </div>
+        <div class="screenshot-frame">
+          <img src="/assets/screenshots/tagging.png" alt="Tagging and collections"
+               onerror="this.parentElement.innerHTML='<div class=&quot;aspect-video flex items-center justify-center text-white/30 text-sm font-mono&quot;>drop tagging screenshot here</div>'" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section id="pricing" class="py-24 bg-ink-800/30 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="badge mb-4">Pricing</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Try free, buy once</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">No subscription. No account required. Pay once during beta and you'll get every update from here through 1.0.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <!-- Free demo card -->
+        <div id="download" class="card rounded-2xl p-8">
+          <div class="text-xs uppercase tracking-widest text-white/50 mb-2">Demo</div>
+          <div class="flex items-baseline gap-2 mb-1">
+            <span class="text-5xl font-extrabold text-white">Free</span>
+          </div>
+          <p class="text-white/60 mb-6">Test the workflow on your real files.</p>
+          <ul class="space-y-3 mb-8 text-sm text-white/80">
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Full tagging, rating, search & collections</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Loop preview, thumbnails, codec detection</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Resolume drag-and-drop integration</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Local database & relink-missing</li>
+            <li class="flex gap-3"><span class="text-white/40">·</span><span class="text-white/60">Metadata export: up to 10 distinct files per session</span></li>
+            <li class="flex gap-3"><span class="text-white/40">·</span><span class="text-white/60">One-file-at-a-time export</span></li>
+          </ul>
+          <a href="#" class="btn-ghost block text-center py-3 rounded-lg text-white font-semibold">Download Demo</a>
+          <p class="text-xs text-white/40 mt-3 text-center">Windows · clips not included</p>
+        </div>
+
+        <!-- Beta access card -->
+        <div id="beta" class="card rounded-2xl p-8 relative" style="border-color: rgba(255,106,26,0.4); box-shadow: 0 0 60px -20px rgba(255,106,26,0.4);">
+          <div class="absolute -top-3 left-8 badge">Recommended</div>
+          <div class="text-xs uppercase tracking-widest text-flame-400 mb-2">Beta Access</div>
+          <div class="flex items-baseline gap-2 mb-1">
+            <span class="text-5xl font-extrabold text-white">$XX</span>
+            <span class="text-white/50">one-time</span>
+          </div>
+          <p class="text-white/60 mb-6">Pay once, get every update through 1.0.</p>
+          <ul class="space-y-3 mb-8 text-sm text-white/80">
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Everything in the demo</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Unlimited batch metadata export</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> No per-session file limits</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> All beta updates included</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Free upgrade to 1.0 when released</li>
+            <li class="flex gap-3"><span class="text-flame-500">✓</span> Priority support via GitHub Issues</li>
+          </ul>
+          <a href="#beta-signup" class="btn-primary block text-center py-3 rounded-lg">Get Beta Access</a>
+          <p class="text-xs text-white/40 mt-3 text-center">Purchase opens when Gumroad goes live</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TUTORIAL TEASER ============ -->
+  <section id="tutorial" class="py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="card rounded-2xl p-10 md:p-14 text-center">
+        <span class="badge mb-4">Tutorial</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Walkthrough video coming soon</h2>
+        <p class="text-white/60 max-w-2xl mx-auto mb-8">A full set-up-to-show tutorial is in production. In the meantime, the demo ships with sensible defaults — you can be searching your library in under five minutes.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="#beta-signup" class="btn-primary px-6 py-3 rounded-lg">Notify me when it's live</a>
+          <a href="#" class="btn-ghost px-6 py-3 rounded-lg text-white">Read the quick-start</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="py-24 bg-ink-800/30 border-y border-white/5">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="badge mb-4">FAQ</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white">Questions</h2>
+      </div>
+
+      <div class="space-y-3">
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            What's the difference between the demo and beta access?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">The demo gives you the full app — tagging, search, collections, preview, Resolume drag-and-drop — but limits metadata export to 10 distinct files per app session, one file at a time. Beta access removes those limits and unlocks batch export. The idea is you can fully test the workflow before paying.</p>
+        </details>
+
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            Does Stagehand work without Resolume?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Yes — Stagehand is a standalone clip manager. It just happens to integrate especially well with Resolume via drag-and-drop and the Resolume REST API. If you VJ in another tool, the tagging, search, preview, and metadata export still work perfectly.</p>
+        </details>
+
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            What file formats are supported?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Most common video and image formats, with specialised handling for DXV-encoded MOV files (the Resolume-native codec). Stagehand detects codec, FPS, alpha, quality, and resolution automatically.</p>
+        </details>
+
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            Where is my data stored?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Entirely on your machine. Stagehand uses a local database for fast search, and writes metadata back into your files using ExifTool. No cloud, no account, no telemetry by default.</p>
+        </details>
+
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            What happens if I move my clips to a new drive?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Stagehand detects missing files on startup or when you hit Refresh Database, then lets you relink the missing folder in one step — your tags, ratings, and collections stay intact.</p>
+        </details>
+
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            Will beta buyers get the final release?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Yes. Pay once during beta and you get every update through 1.0 and beyond.</p>
+        </details>
+
+        <details class="card rounded-xl p-5 group">
+          <summary class="flex items-center justify-between text-white font-semibold">
+            How do I report a bug or request a feature?
+            <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
+          </summary>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Bug reports and feature requests live on GitHub Issues — see the Support section below. You don't need to be a developer; just describe what happened or what you want.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BETA SIGNUP / SUPPORT ============ -->
+  <section id="beta-signup" class="py-24">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-6">
+      <!-- Signup -->
+      <div class="card rounded-2xl p-8">
+        <span class="badge mb-4">Beta Signup</span>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Get notified when beta opens</h3>
+        <p class="text-white/60 mb-6 text-sm">Drop your email and I'll send a single message when paid beta access goes live. No newsletter, no spam.</p>
+
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-3">
+          <input type="email" name="email" required placeholder="you@studio.com"
+                 class="w-full bg-ink-700 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-flame-500 transition" />
+          <input type="hidden" name="_subject" value="Stagehand beta signup" />
+          <button type="submit" class="btn-primary w-full py-3 rounded-lg">Notify me</button>
+        </form>
+        <p class="text-xs text-white/40 mt-3">Powered by Formspree. Your email is only used to contact you about Stagehand.</p>
+      </div>
+
+      <!-- Support -->
+      <div id="support" class="card rounded-2xl p-8">
+        <span class="badge mb-4">Support</span>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Bugs, ideas, and questions</h3>
+        <p class="text-white/60 mb-6 text-sm">Issues and feature requests are tracked publicly on GitHub. Open a ticket and you'll get a response.</p>
+
+        <div class="space-y-2">
+          <a href="https://github.com/FyodorKrasniy/stagehand-vj/issues/new?labels=bug&template=bug_report.md"
+             class="flex items-center justify-between bg-ink-700/60 hover:bg-ink-600/60 border border-white/10 hover:border-flame-500/40 rounded-lg px-4 py-3 transition">
+            <div>
+              <div class="text-white font-medium text-sm">Report a bug</div>
+              <div class="text-white/50 text-xs">Something broken or unexpected</div>
+            </div>
+            <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="https://github.com/FyodorKrasniy/stagehand-vj/issues/new?labels=enhancement&template=feature_request.md"
+             class="flex items-center justify-between bg-ink-700/60 hover:bg-ink-600/60 border border-white/10 hover:border-flame-500/40 rounded-lg px-4 py-3 transition">
+            <div>
+              <div class="text-white font-medium text-sm">Request a feature</div>
+              <div class="text-white/50 text-xs">Workflow you wish Stagehand had</div>
+            </div>
+            <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="https://github.com/FyodorKrasniy/stagehand-vj/issues"
+             class="flex items-center justify-between bg-ink-700/60 hover:bg-ink-600/60 border border-white/10 hover:border-flame-500/40 rounded-lg px-4 py-3 transition">
+            <div>
+              <div class="text-white font-medium text-sm">Browse open issues</div>
+              <div class="text-white/50 text-xs">See what's already being worked on</div>
+            </div>
+            <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-white/5 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2.5">
+        <img src="/assets/logo-mark.png" alt="" class="w-7 h-7" onerror="this.style.display='none'" />
+        <span class="font-extrabold tracking-tight text-white">STAGEHAND</span>
+        <span class="text-flame-500 font-extrabold tracking-tight">VJ</span>
+        <span class="text-white/30 text-xs ml-2">Beta</span>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-white/50">
+        <a href="#features" class="hover:text-white">Features</a>
+        <a href="#pricing" class="hover:text-white">Pricing</a>
+        <a href="#support" class="hover:text-white">Support</a>
+        <a href="https://github.com/FyodorKrasniy/stagehand-vj" class="hover:text-white">GitHub</a>
+      </div>
+      <div class="text-xs text-white/30">&copy; 2026 Stagehand VJ. Built for VJs.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
