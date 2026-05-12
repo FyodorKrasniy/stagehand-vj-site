@@ -1,6 +1,6 @@
 # Stagehand VJ — Marketing Site
 
-Single-file landing page for [Stagehand VJ Clip Manager](https://stagehandvj.example).
+Single-file landing page for [Stagehand VJ Clip Manager](https://stagehandvj.com).
 
 ## Stack
 
@@ -37,7 +37,6 @@ Search the file for these strings and swap them out:
 |---|---|
 | `YOUR_FORM_ID` | Your Formspree form ID (free at [formspree.io](https://formspree.io)) |
 | `$XX` | Your beta access price (e.g. `$29`) |
-| `https://stagehandvj.example` | Your real domain once you grab one |
 
 The "Download Demo" button currently links to `#` — wire it to your actual demo download (Gumroad, direct link, etc.) when ready.
 
