@@ -29,16 +29,12 @@ Then visit `http://localhost:8000`.
 
 All assets live in `/assets/`. The hero, screenshots, logo, OG image, favicon, and workflow icons are wired in. Missing images degrade gracefully via `onerror` fallbacks, so swapping in new images is safe.
 
-## Things to replace before going live
+## Live wiring
 
-Search the file for these strings and swap them out:
-
-| Find | Replace with |
-|---|---|
-| `YOUR_FORM_ID` | Your Formspree form ID (free at [formspree.io](https://formspree.io)) |
-| `$XX` | Your beta access price (e.g. `$29`) |
-
-The "Download Demo" button currently links to `#` — wire it to your actual demo download (Gumroad, direct link, etc.) when ready.
+- **Demo download** → GitHub release `v0.3.0-demo` (`StagehandVJ-Demo.exe`, Windows). Buttons use the GitHub "latest" alias so future demo releases auto-pick up.
+- **Beta licence checkout** → Lemon Squeezy product `452521b6-782a-4d64-b89a-cb43312098ce`. To change, search the file for `lemonsqueezy.com/checkout/buy/` and swap the URL.
+- **Email signup** → Formspree form `mnjwldzb` (search for that string to replace).
+- **Price** is set to `$25 AUD` in four places (nav, hero secondary button, pricing card, pricing card button). Search for `$25 AUD` and `$25</span>` to swap.
 
 ## Deploy to Cloudflare Pages (free)
 
@@ -76,8 +72,13 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 │   │   ├── icon-search.png
 │   │   ├── icon-play.png
 │   │   └── icon-collection.png
-│   └── screenshots/
-│       ├── main.jpg            # hero
+│   ├── stagehand-*-large.gif   # annotated feature gifs used on the page
+│   ├── gifs/                   # source/variants of the feature gifs
+│   │   ├── *.gif               # small unannotated
+│   │   ├── annotated/*.gif     # small annotated
+│   │   └── annotated-large/    # large annotated (canonical copies are also mirrored at /assets root)
+│   └── screenshots/            # legacy static screenshots (no longer used on the page)
+│       ├── main.jpg
 │       ├── search.jpg
 │       ├── preview.jpg
 │       └── tagging.jpg
