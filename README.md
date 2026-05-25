@@ -27,7 +27,17 @@ Then visit `http://localhost:8000`.
 
 ## Assets
 
-All assets live in `/assets/`. The hero, screenshots, logo, OG image, favicon, and workflow icons are wired in. Missing images degrade gracefully via `onerror` fallbacks, so swapping in new images is safe.
+All assets live in `/assets/`. The hero composite, feature GIFs, logo, OG image, favicon, and workflow icons are wired in. Missing images degrade gracefully via `onerror` fallbacks, so swapping in new images is safe.
+
+### Regenerating the hero composite
+
+The hero image (`assets/hero-platforms.png`) is built from `tools/sources/stagehand-mac.png` + `tools/sources/stagehand-windows.png` + `assets/logo-mark.png` by a small Pillow script. To rebuild after swapping a source screenshot:
+
+```powershell
+py tools/compose_hero.py
+```
+
+Layout knobs (canvas size, screenshot widths, rotations, positions, shadows, logo placement) all live at the top of `tools/compose_hero.py`.
 
 ## Live wiring
 
@@ -63,9 +73,10 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 .
 ├── index.html                  # the entire site
 ├── assets/
-│   ├── logo-mark.png           # nav + footer logo
+│   ├── logo-mark.png           # nav + footer logo, also overlaid on hero composite
 │   ├── favicon.png             # browser tab icon
 │   ├── og-image.png            # social share card (1200x630)
+│   ├── hero-platforms.png      # composed Mac + Windows hero (output of tools/compose_hero.py)
 │   ├── icons/                  # workflow-step icons
 │   │   ├── icon-folder.png
 │   │   ├── icon-tag.png
@@ -82,5 +93,10 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 │       ├── search.jpg
 │       ├── preview.jpg
 │       └── tagging.jpg
+├── tools/
+│   ├── compose_hero.py         # regenerate assets/hero-platforms.png from sources
+│   └── sources/                # raw Mac/Windows screenshots used by the composer
+│       ├── stagehand-mac.png
+│       └── stagehand-windows.png
 └── README.md                   # this file
 ```
