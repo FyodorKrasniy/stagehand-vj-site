@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stagehand VJ — Organize your VJ clip library before the room is full</title>
-  <meta name="description" content="Stagehand turns a messy folder of clips into a searchable, playable, Resolume-ready library. Tag, rate, preview, and load straight into Resolume — Windows + Mac, signed and notarized." />
+  <title>Stagehand VJ — Clip library manager for Resolume workflows</title>
+  <meta name="description" content="Stagehand is a clip library manager and metadata tool for Resolume-based VJ workflows. Tag, search, preview, and hand off clips to Resolume. Local-first, cross-platform, signed and notarized." />
 
   <link rel="canonical" href="https://stagehandvj.com/" />
-  <meta property="og:title" content="Stagehand VJ — Organize your VJ clip library before the room is full" />
+  <meta property="og:title" content="Stagehand VJ — Clip library manager for Resolume workflows" />
   <meta property="og:description" content="The local clip library that lives next to Resolume. Tag, search, preview, and one-keystroke load." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stagehandvj.com/" />
   <meta property="og:image" content="https://stagehandvj.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Stagehand VJ — Organize your VJ clip library before the room is full" />
+  <meta name="twitter:title" content="Stagehand VJ — Clip library manager for Resolume workflows" />
   <meta name="twitter:description" content="The local clip library that lives next to Resolume. Tag, search, preview, and one-keystroke load." />
   <meta name="twitter:image" content="https://stagehandvj.com/assets/og-image.png" />
 
@@ -173,15 +173,12 @@
       <span class="badge mb-6"><span class="w-1.5 h-1.5 rounded-full bg-flame-500 animate-pulse"></span> Beta out now · Windows + Mac</span>
 
       <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
-        <span class="text-gradient">Organize your VJ library</span><br/>
-        <span class="flame-gradient">before the room is full</span>
+        <span class="text-gradient">The local clip library</span><br/>
+        <span class="flame-gradient">built for Resolume.</span>
       </h1>
 
-      <p class="max-w-2xl mx-auto text-lg md:text-xl text-white/70 leading-relaxed mb-3">
-        Stagehand turns a messy folder of clips into a <strong class="text-white">searchable, playable, Resolume-ready library</strong>. Tag once, find by vibe, preview without leaving the flow, then one-keystroke load straight into your composition.
-      </p>
-      <p class="max-w-2xl mx-auto text-sm text-white/40 mb-10">
-        For the part of VJing that happens <em>before</em> the show.
+      <p class="max-w-2xl mx-auto text-lg md:text-xl text-white/70 leading-relaxed mb-10">
+        Stagehand indexes your VJ clip library locally, tracks tags, ratings, and collections, and pushes clips into Resolume via drag-and-drop or REST. <strong class="text-white">Portable metadata, signed binaries, no cloud.</strong>
       </p>
 
       <div class="flex flex-col sm:flex-row gap-3 justify-center mb-4">
@@ -215,16 +212,16 @@
     </div>
   </section>
 
-  <!-- ============ THE PROBLEM ============ -->
+  <!-- ============ WHAT IT SOLVES ============ -->
   <section class="py-20 md:py-24">
     <div class="max-w-5xl mx-auto px-6 text-center">
-      <span class="badge mb-4">The problem</span>
+      <span class="badge mb-4">Why it exists</span>
       <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight">
-        It's 8&nbsp;PM. Doors at 9. <br class="hidden md:block"/>
-        Your library is two terabytes of folders.
+        Resolume is a performance tool. <br class="hidden md:block"/>
+        It isn't a library manager.
       </h2>
       <p class="text-white/60 max-w-3xl mx-auto text-lg leading-relaxed">
-        Resolume is a brilliant live tool, but it isn't a library manager. So your clips end up in nested folders named <span class="font-mono text-white/70">/glitch/v2_final/</span>, your best loops live next to your rough cuts, and finding the right asset for a transition means alt-tabbing through Explorer with the show already running. Stagehand fixes the part Resolume doesn't.
+        Tag, rating, and collection metadata typically end up encoded in folder names and filenames — workable until a library grows past a few hundred clips. Stagehand provides a dedicated local index, a metadata layer that writes back into the files themselves, and a clean handoff into Resolume via drag-and-drop or REST.
       </p>
     </div>
   </section>
@@ -235,7 +232,7 @@
       <div class="text-center mb-14">
         <span class="badge mb-4">Workflow</span>
         <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Scan, tag, search, preview, load</h2>
-        <p class="text-white/60 max-w-2xl mx-auto text-lg">Five steps from folder chaos to a composition that's ready to fire.</p>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">The five stages of working in Stagehand, from import through Resolume handoff.</p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -253,7 +250,7 @@
             <div class="font-mono text-flame-500 text-xs">02</div>
           </div>
           <h3 class="text-white font-semibold mb-1.5 text-sm">Tag</h3>
-          <p class="text-white/55 text-xs leading-relaxed">Multi-tag across batches. Star-rate the gems. Auto-tag from folder names if you're already organised.</p>
+          <p class="text-white/55 text-xs leading-relaxed">Multi-tag across batches. Star-rate clips. Auto-tag from existing folder names if your library is already structured.</p>
         </div>
         <div class="card rounded-xl p-5">
           <div class="flex items-center justify-between mb-3">
@@ -261,7 +258,7 @@
             <div class="font-mono text-flame-500 text-xs">03</div>
           </div>
           <h3 class="text-white font-semibold mb-1.5 text-sm">Search</h3>
-          <p class="text-white/55 text-xs leading-relaxed">Filter by tag, rating, collection, codec. ALL or ANY matching — narrow a drive to the clips that fit the set.</p>
+          <p class="text-white/55 text-xs leading-relaxed">Filter by tag, rating, collection, codec. ALL or ANY matching across filename, tags, collections, and metadata.</p>
         </div>
         <div class="card rounded-xl p-5">
           <div class="flex items-center justify-between mb-3">
@@ -269,7 +266,7 @@
             <div class="font-mono text-flame-500 text-xs">04</div>
           </div>
           <h3 class="text-white font-semibold mb-1.5 text-sm">Preview</h3>
-          <p class="text-white/55 text-xs leading-relaxed">Loop-preview inline. Toggle alpha to see what's actually transparent. Confirm vibe before you commit.</p>
+          <p class="text-white/55 text-xs leading-relaxed">Inline video playback. Loop, scrub, and toggle alpha checkerboard to confirm transparency before commit.</p>
         </div>
         <div class="card rounded-xl p-5">
           <div class="flex items-center justify-between mb-3">
@@ -277,7 +274,7 @@
             <div class="font-mono text-flame-500 text-xs">05</div>
           </div>
           <h3 class="text-white font-semibold mb-1.5 text-sm">Load</h3>
-          <p class="text-white/55 text-xs leading-relaxed">One keystroke pushes the selected clip into a Resolume layer + column. Auto-advance, auto-trigger, done.</p>
+          <p class="text-white/55 text-xs leading-relaxed">Push the selected clip into a Resolume layer + column. Optional auto-advance and auto-trigger after load.</p>
         </div>
       </div>
     </div>
@@ -287,17 +284,17 @@
   <section id="moments" class="py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
-        <span class="badge mb-4">A real product tour</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Six moments that matter</h2>
-        <p class="text-white/60 max-w-2xl mx-auto text-lg">Not a feature list — a workflow. Each step is the bit of VJing that usually wastes time, made fast.</p>
+        <span class="badge mb-4">Walkthrough</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Six capabilities, in the actual UI</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">Each section is a cropped view of the app showing one part of the workflow.</p>
       </div>
 
-      <!-- Moment 1: Messy → Organized -->
+      <!-- Moment 1: Import -->
       <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center mb-24">
         <div class="order-2 md:order-1">
           <div class="moment-num">01 · Import</div>
-          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">From a messy folder<br/>to an indexed library.</h3>
-          <p class="text-white/65 leading-relaxed mb-5">Drop a folder of clips on Stagehand. It reads codec, FPS, alpha, resolution, thumbnails, and any tags you've already written into file metadata. Your existing structure becomes a searchable index — without you renaming a single file.</p>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Import a folder,<br/>build a searchable index.</h3>
+          <p class="text-white/65 leading-relaxed mb-5">Drop a folder onto Stagehand and it reads codec, FPS, alpha, resolution, thumbnails, and any tags already present in file metadata. Existing folder structure becomes a searchable index without renaming a single file.</p>
           <ul class="space-y-2.5 text-sm text-white/75">
             <li class="flex gap-2.5"><span class="check">✓</span> Auto-tag from existing folder names</li>
             <li class="flex gap-2.5"><span class="check">✓</span> Imports XMP, IPTC, Windows Tags, and QuickTime keywords</li>
@@ -309,19 +306,19 @@
         </div>
       </div>
 
-      <!-- Moment 2: Find by vibe -->
+      <!-- Moment 2: Tag &amp; rate -->
       <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center mb-24">
         <div class="screenshot-frame">
           <img src="assets/stagehand-controls-options-large.gif" alt="Tagging and editing clip metadata inline in the grid" loading="lazy" />
         </div>
         <div>
           <div class="moment-num">02 · Tag &amp; rate</div>
-          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Stop remembering folder names.<br/>Start finding by vibe.</h3>
-          <p class="text-white/65 leading-relaxed mb-5">Tag in batches, rate the gems, edit Artist/Year/Comments inline. Multi-clip edits use a "tick what to apply" panel so you never accidentally overwrite Artist on 50 clips when you only meant to change Rating.</p>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Tag, rate, and edit<br/>metadata inline.</h3>
+          <p class="text-white/65 leading-relaxed mb-5">Tag in batches, apply star ratings, edit Artist/Year/Comments directly in the grid. Multi-clip edits use a "tick what to apply" panel so a Rating change can't silently overwrite Artist on the selection.</p>
           <ul class="space-y-2.5 text-sm text-white/75">
-            <li class="flex gap-2.5"><span class="check">✓</span> Comma-separate to add multiple tags at once</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> Click-to-star ratings, sortable in the grid</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> A–Z tag browser + drag-onto-tag assignment</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Comma-separated input adds multiple tags at once</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Click-to-star ratings, sortable column</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> A–Z tag browser, drag-onto-tag assignment</li>
           </ul>
         </div>
       </div>
@@ -330,12 +327,12 @@
       <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center mb-24">
         <div class="order-2 md:order-1">
           <div class="moment-num">03 · Preview</div>
-          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Scrub clips without<br/>leaving the flow.</h3>
-          <p class="text-white/65 leading-relaxed mb-5">FFmpeg-powered inline playback. Double-click any clip to preview, loop to confirm, toggle alpha to see what's actually transparent vs. black. No more launching another player just to check a loop point.</p>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Inline video playback,<br/>with alpha and loop.</h3>
+          <p class="text-white/65 leading-relaxed mb-5">Double-click any clip to preview in the right panel. Loop, scrub, and toggle an alpha checkerboard to verify transparency before committing the clip to a collection or Resolume slot.</p>
           <ul class="space-y-2.5 text-sm text-white/75">
-            <li class="flex gap-2.5"><span class="check">✓</span> Loop toggle + buffering indicator for big 4K clips</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Loop toggle and buffering indicator for 4K clips</li>
             <li class="flex gap-2.5"><span class="check">✓</span> Alpha checkerboard mode</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> Hash-keyed thumbnail cache — instant on every reopen</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Hash-keyed thumbnail cache — instant on reopen</li>
           </ul>
         </div>
         <div class="order-1 md:order-2 screenshot-frame">
@@ -350,12 +347,12 @@
         </div>
         <div>
           <div class="moment-num">04 · Collections</div>
-          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Build a setlist<br/>without moving files.</h3>
-          <p class="text-white/65 leading-relaxed mb-5">Group clips into named collections for tonight's gig, a recurring residency, a mood, a year. One clip belongs to many collections. Filter the grid to any collection in one click — no duplication, no copy-pasting to a "show folder."</p>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Collections without<br/>duplicating files.</h3>
+          <p class="text-white/65 leading-relaxed mb-5">Group clips into named collections — by show, residency, mood, or year. A clip can belong to any number of collections. Filter the grid to one collection in a single click. No duplication on disk, no copy-pasting into "show folders."</p>
           <ul class="space-y-2.5 text-sm text-white/75">
             <li class="flex gap-2.5"><span class="check">✓</span> Drag clips onto a collection row to add</li>
             <li class="flex gap-2.5"><span class="check">✓</span> Ctrl-click for multi-collection assignment</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> Rename, reassign, delete — files stay untouched</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Rename, reassign, or delete — source files untouched</li>
           </ul>
         </div>
       </div>
@@ -364,12 +361,12 @@
       <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center mb-24">
         <div class="order-2 md:order-1">
           <div class="moment-num">05 · Handoff</div>
-          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Your prep tool talks to<br/>your performance tool.</h3>
-          <p class="text-white/65 leading-relaxed mb-5">When it's time to play, send the selected clip straight into Resolume — pick layer + column, auto-advance, auto-trigger, done. <span class="font-mono text-white/85">Ctrl+Enter</span> loads. <span class="font-mono text-white/85">Ctrl+Shift+V</span> pulls clips back from Resolume to edit and re-tag. Pin-on-top + live mode means you never alt-tab during a transition.</p>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Hand off clips to Resolume<br/>by layer and column.</h3>
+          <p class="text-white/65 leading-relaxed mb-5">Send the selected clip into Resolume at a chosen layer + column, with optional auto-advance and auto-trigger. <span class="font-mono text-white/85">Ctrl+Enter</span> loads. <span class="font-mono text-white/85">Ctrl+Shift+V</span> pulls clips from Resolume back into Stagehand for editing or re-tagging. Pin-on-top + live mode keep the app accessible alongside Resolume.</p>
           <ul class="space-y-2.5 text-sm text-white/75">
             <li class="flex gap-2.5"><span class="check">✓</span> Load to layer + column, or next empty slot</li>
             <li class="flex gap-2.5"><span class="check">✓</span> Auto-advance + auto-trigger after load</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> Open clips in Resolume Alley from any context menu</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Open clips in Resolume Alley from the context menu</li>
           </ul>
         </div>
         <div class="order-1 md:order-2 screenshot-frame">
@@ -388,7 +385,7 @@
               </div>
               <div class="flex flex-col items-center text-white/40">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m-4 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                <div class="text-[10px] mt-1 font-mono">ExifTool</div>
+                <div class="text-[10px] mt-1 font-mono uppercase tracking-wider">Sync</div>
               </div>
               <div class="card rounded-xl px-5 py-4 text-left min-w-[140px]">
                 <div class="text-xs text-flame-400 uppercase tracking-wider mb-1">File Metadata</div>
@@ -400,12 +397,12 @@
         </div>
         <div>
           <div class="moment-num">06 · Portable metadata</div>
-          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Your work survives<br/>outside the app.</h3>
-          <p class="text-white/65 leading-relaxed mb-5">Stagehand writes tags, ratings, artist, year, and collections back into your files using ExifTool — into the standard fields Windows, Finder, and other media tools already understand. Move a clip to another machine and the tags travel with it. Switch tools later? Nothing's trapped.</p>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">Metadata that travels<br/>with the files.</h3>
+          <p class="text-white/65 leading-relaxed mb-5">Stagehand writes tags, ratings, artist, year, and collections back into the files themselves — into the standard metadata fields that Windows Explorer, Finder, and other media tools already read. Move a clip to another machine and the metadata travels with it. Switch tools later and the work isn't trapped in a proprietary database.</p>
           <ul class="space-y-2.5 text-sm text-white/75">
             <li class="flex gap-2.5"><span class="check">✓</span> XMP, IPTC, Windows Tags, QuickTime keywords</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> Background write queue — UI never stalls</li>
-            <li class="flex gap-2.5"><span class="check">✓</span> Re-import to recover tags after a DB swap</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Background write queue — UI doesn't stall on big batches</li>
+            <li class="flex gap-2.5"><span class="check">✓</span> Re-import from files to recover tags after a DB swap</li>
           </ul>
         </div>
       </div>
@@ -416,9 +413,9 @@
   <section id="platform" class="py-20 md:py-24 bg-ink-800/30 border-y border-white/5">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-14">
-        <span class="badge mb-4">Built for the booth</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Self-contained. Signed. Offline-friendly.</h2>
-        <p class="text-white/60 max-w-2xl mx-auto text-lg">VJ rigs are usually offline at the venue. You can't be downloading dependencies five minutes before doors.</p>
+        <span class="badge mb-4">Distribution</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Cross-platform, signed, self-contained.</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">Native binaries on Windows and macOS, all dependencies bundled. No runtime installs, no admin rights, no package managers.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-5">
@@ -434,14 +431,14 @@
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
           </div>
           <h3 class="text-white font-semibold mb-2">Nothing to install separately</h3>
-          <p class="text-white/60 text-sm leading-relaxed">FFmpeg, FFprobe, and ExifTool all ship inside the installer/.app. No Homebrew, no Chocolatey, no .NET runtime, no Python. Drag and run. Per-arch native binaries on Mac.</p>
+          <p class="text-white/60 text-sm leading-relaxed">Video processing, codec analysis, and metadata writing tools all ship inside the installer/.app. No Homebrew, no Chocolatey, no .NET runtime, no Python. Drag and run. Per-arch native binaries on Mac.</p>
         </div>
         <div class="card rounded-xl p-6">
           <div class="w-11 h-11 rounded-lg bg-flame-500/15 flex items-center justify-center mb-4 text-flame-400">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
           </div>
           <h3 class="text-white font-semibold mb-2">Local-first, no account</h3>
-          <p class="text-white/60 text-sm leading-relaxed">Fast SQLite index on your machine. No cloud sync, no sign-up, no telemetry by default. 7-day offline grace period after last licence validation — no surprise lock at the venue.</p>
+          <p class="text-white/60 text-sm leading-relaxed">Fast SQLite index on your machine. No cloud sync, no sign-up, no telemetry by default. 7-day offline grace period after the last licence check, so intermittent network connectivity doesn't block usage.</p>
         </div>
       </div>
     </div>
@@ -451,9 +448,9 @@
   <section id="features" class="py-20 md:py-24">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-14">
-        <span class="badge mb-4">Everything else</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">The unsexy stuff, done right</h2>
-        <p class="text-white/60 max-w-2xl mx-auto text-lg">The features you don't think about until you need them. Stagehand has them.</p>
+        <span class="badge mb-4">Reference</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">More of what's in the box</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">Additional capabilities outside the headline workflow.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -471,27 +468,27 @@
         </div>
         <div class="card rounded-xl p-6 transition">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Idle background refresh</h3>
-          <p class="text-white/60 text-sm leading-relaxed">After an import or edit, new clips appear automatically when you're not actively typing or selecting. No "Show All" button-hunt.</p>
+          <p class="text-white/60 text-sm leading-relaxed">After an import or edit, new clips appear in the grid automatically when the user isn't actively typing or selecting.</p>
         </div>
         <div class="card rounded-xl p-6 transition">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>LIVE mode + pin-on-top</h3>
-          <p class="text-white/60 text-sm leading-relaxed">One button collapses Stagehand to a minimal performance layout. Pin above Resolume on a second screen or tablet without stealing real estate.</p>
+          <p class="text-white/60 text-sm leading-relaxed">A single button switches to a minimal performance layout. Pin above Resolume on a second monitor or tablet without consuming screen real estate.</p>
         </div>
         <div class="card rounded-xl p-6 transition">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Two activations per licence</h3>
-          <p class="text-white/60 text-sm leading-relaxed">Covers your laptop and a backup rig out of the box. Deactivate from the app to free a slot when you retire a machine.</p>
+          <p class="text-white/60 text-sm leading-relaxed">Each licence covers two machines — typically a primary and backup rig. Deactivate from inside the app to free a slot when a machine is retired.</p>
         </div>
         <div class="card rounded-xl p-6 transition">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Database provenance</h3>
-          <p class="text-white/60 text-sm leading-relaxed">Each Stagehand DB carries its own creator, comment, and timestamps. Swap libraries between rigs and you always know what you're loading.</p>
+          <p class="text-white/60 text-sm leading-relaxed">Each Stagehand database carries its own creator, comment, and timestamps, displayed at the top of the Database panel. Useful when swapping DBs between rigs.</p>
         </div>
         <div class="card rounded-xl p-6 transition">
-          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Keyboard-first</h3>
-          <p class="text-white/60 text-sm leading-relaxed"><span class="font-mono text-white/80">Ctrl+Enter</span> loads to Resolume, <span class="font-mono text-white/80">Ctrl+Shift+V</span> pastes clips from Resolume, <span class="font-mono text-white/80">F5</span> reconnects. Hands stay on the controller.</p>
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Keyboard shortcuts</h3>
+          <p class="text-white/60 text-sm leading-relaxed"><span class="font-mono text-white/80">Ctrl+Enter</span> loads to Resolume, <span class="font-mono text-white/80">Ctrl+Shift+V</span> pastes clips from Resolume, <span class="font-mono text-white/80">F5</span> reconnects to the Resolume API.</p>
         </div>
         <div class="card rounded-xl p-6 transition">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Per-user install</h3>
-          <p class="text-white/60 text-sm leading-relaxed">Windows installs to <span class="font-mono text-white/80">%LOCALAPPDATA%</span> — no admin rights needed. Mac is a signed .app drag-install. Settings + DB survive reinstalls.</p>
+          <p class="text-white/60 text-sm leading-relaxed">Windows installs to <span class="font-mono text-white/80">%LOCALAPPDATA%</span> with no admin rights. Mac is a signed .app drag-install. Settings and database survive reinstalls.</p>
         </div>
       </div>
     </div>
@@ -502,8 +499,8 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-14">
         <span class="badge mb-4">Pricing</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Try free. Pay once. Keep working.</h2>
-        <p class="text-white/60 max-w-2xl mx-auto text-lg">Same app, same binary. The licence just removes the export cap. No subscription, no account required, every update through 1.0 included.</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Try free, pay once</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">Same binary in both tiers. The licence simply removes the demo's export cap. No subscription, no account, and every update through 1.0 is included.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -534,14 +531,14 @@
             <span class="text-5xl font-extrabold text-white">$25</span>
             <span class="text-white/50">AUD · one-time</span>
           </div>
-          <p class="text-white/60 mb-6">Same app, unlocked. Pay once, get every update through 1.0.</p>
+          <p class="text-white/60 mb-6">The full app, unlocked. One-time payment, includes every update through 1.0.</p>
           <ul class="space-y-3 mb-8 text-sm text-white/80">
             <li class="flex gap-3"><span class="check">✓</span> Everything in the demo</li>
             <li class="flex gap-3"><span class="check">✓</span> Unlimited batch metadata export</li>
             <li class="flex gap-3"><span class="check">✓</span> No per-session file limits</li>
             <li class="flex gap-3"><span class="check">✓</span> Windows + Mac installers (signed &amp; notarized)</li>
-            <li class="flex gap-3"><span class="check">✓</span> Two activations — laptop + backup rig</li>
-            <li class="flex gap-3"><span class="check">✓</span> 7-day offline grace at the venue</li>
+            <li class="flex gap-3"><span class="check">✓</span> Two activations per licence — primary + backup</li>
+            <li class="flex gap-3"><span class="check">✓</span> 7-day offline grace period after last licence check</li>
             <li class="flex gap-3"><span class="check">✓</span> Free upgrade to 1.0 + all beta updates</li>
             <li class="flex gap-3"><span class="check">✓</span> Priority support via GitHub Issues</li>
           </ul>
@@ -558,7 +555,7 @@
       <div class="card rounded-2xl p-10 md:p-14 text-center">
         <span class="badge mb-4">Tutorial</span>
         <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Walkthrough video coming soon</h2>
-        <p class="text-white/60 max-w-2xl mx-auto mb-8">A full set-up-to-show tutorial is in production. In the meantime, the demo ships with sensible defaults — you can be searching your library in under five minutes.</p>
+        <p class="text-white/60 max-w-2xl mx-auto mb-8">A full setup-to-handoff walkthrough is in production. In the meantime, the demo ships with sensible defaults — point it at a folder and search across all imported metadata immediately.</p>
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
           <a href="#beta-signup" class="btn-primary px-6 py-3 rounded-lg">Notify me when it's live</a>
           <a href="https://github.com/FyodorKrasniy/stagehand-vj" class="btn-ghost px-6 py-3 rounded-lg text-white">Read the quick-start</a>
@@ -605,7 +602,7 @@
             Does Stagehand work offline?
             <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
           </summary>
-          <p class="text-white/60 mt-3 text-sm leading-relaxed">Yes. The library, search, preview, and Resolume integration are 100% local. The only thing that touches the network is licence validation, and that includes a 7-day offline grace period after the last successful check — so a flaky venue Wi-Fi won't lock you out mid-show.</p>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Yes. The library, search, preview, and Resolume integration run entirely locally. The only thing that touches the network is licence validation, and that includes a 7-day offline grace period after the last successful check, so intermittent connectivity doesn't block usage.</p>
         </details>
 
         <details class="card rounded-xl p-5 group">
@@ -629,7 +626,7 @@
             Where is my data stored?
             <span class="faq-chevron text-flame-500 text-2xl leading-none">+</span>
           </summary>
-          <p class="text-white/60 mt-3 text-sm leading-relaxed">Entirely on your machine. Stagehand uses a local SQLite database for fast search, and writes metadata back into your files using ExifTool. No cloud, no account, no telemetry by default.</p>
+          <p class="text-white/60 mt-3 text-sm leading-relaxed">Entirely on your machine. Stagehand uses a local database for fast search and writes metadata back into your files using standard metadata fields. No cloud, no account, no telemetry by default.</p>
         </details>
 
         <details class="card rounded-xl p-5 group">
@@ -664,9 +661,9 @@
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-6">
       <!-- Signup -->
       <div class="card rounded-2xl p-8">
-        <span class="badge mb-4">Stay in the loop</span>
-        <h3 class="text-2xl font-extrabold text-white mb-2">Get update notifications</h3>
-        <p class="text-white/60 mb-6 text-sm">Drop your email and I'll send a short message when new builds drop or the 1.0 launch is imminent. No newsletter, no spam.</p>
+        <span class="badge mb-4">Updates</span>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Build notifications</h3>
+        <p class="text-white/60 mb-6 text-sm">Receive a short notification when new beta builds are published or the 1.0 release ships. Email is used only for these notifications.</p>
 
         <form action="https://formspree.io/f/mnjwldzb" method="POST" class="space-y-3">
           <input type="email" name="email" required placeholder="you@studio.com"
@@ -680,8 +677,8 @@
       <!-- Support -->
       <div id="support" class="card rounded-2xl p-8">
         <span class="badge mb-4">Support</span>
-        <h3 class="text-2xl font-extrabold text-white mb-2">Bugs, ideas, and questions</h3>
-        <p class="text-white/60 mb-6 text-sm">Issues and feature requests are tracked publicly on GitHub. Open a ticket and you'll get a response.</p>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Bug reports and feature requests</h3>
+        <p class="text-white/60 mb-6 text-sm">Issues are tracked publicly on GitHub. Tickets receive a response from the developer.</p>
 
         <div class="space-y-2">
           <a href="https://github.com/FyodorKrasniy/stagehand-vj/issues/new?labels=bug&template=bug_report.md"
@@ -729,7 +726,7 @@
         <a href="#support" class="hover:text-white">Support</a>
         <a href="https://github.com/FyodorKrasniy/stagehand-vj" class="hover:text-white">GitHub</a>
       </div>
-      <div class="text-xs text-white/30">&copy; 2026 Stagehand VJ. Built for VJs.</div>
+      <div class="text-xs text-white/30">&copy; 2026 Stagehand VJ. A clip library tool for Resolume-based workflows.</div>
     </div>
   </footer>
 

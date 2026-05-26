@@ -1,10 +1,13 @@
 """
-Compose the Stagehand hero image as a diagonal split between Mac and Windows.
+Compose the Stagehand hero image.
 
-The canvas is divided by a diagonal from the top-right corner to the
-bottom-left corner. Mac fills the upper-left triangle, Windows fills the
-lower-right triangle. A thin flame-colored accent traces the seam, and the
-transparent logo is overlaid in the top-left.
+Modes:
+  - "sidebyside"  Two full app-window screenshots placed next to each other,
+                  vertically centred, with rounded corners and a soft drop
+                  shadow under each. No cropping, no overlap. (default)
+  - "vertical"    Left half = Mac, right half = Windows, vertical seam.
+  - "diagonal"    Mac fills upper-left triangle, Windows fills lower-right,
+                  diagonal seam from top-right to bottom-left.
 
 Usage:
     py tools/compose_hero.py
@@ -20,24 +23,38 @@ WIN_SRC = SOURCES / "stagehand-windows.png"
 LOGO_SRC = ROOT / "assets" / "logo-mark.png"
 OUT_PATH = ROOT / "assets" / "hero-platforms.png"
 
-# Canvas
-CANVAS_W, CANVAS_H = 2100, 1300
+# "sidebyside" | "vertical" | "diagonal"
+SPLIT_MODE = "sidebyside"
 
-# Each screenshot is "cover" resized to fill the canvas, then cropped using an
-# anchor that keeps the most important UI content in its triangle.
-#   Mac (upper-left triangle)   → anchor on its top-left so the STAGEHAND
-#                                 header + library top stay visible.
-#   Windows (lower-right tri.)  → anchor on its bottom-right so the orange
-#                                 Load-to-Resolume + Tag-management panels
-#                                 + status bar stay visible.
-MAC_ANCHOR = "topleft"
-WIN_ANCHOR = "bottomright"
+# --- side-by-side params ---------------------------------------------------
+# Each window scaled to the same height for visual parity, placed L→R with a
+# gap, vertically centred, drop-shadowed.
+SBS_WINDOW_HEIGHT = 900       # height each app window is scaled to
+SBS_GAP = 80                  # transparent gap between the two windows
+SBS_SIDE_MARGIN = 80          # transparent margin on far left/right edges
+SBS_TOP_MARGIN = 60           # transparent margin above/below windows
+SBS_CORNER_RADIUS = 16
+SBS_SHADOW_BLUR = 60
+SBS_SHADOW_OFFSET = (0, 30)
+SBS_SHADOW_ALPHA = 160
 
-# Diagonal seam: gap between the two triangles, in pixels measured
-# perpendicular to the diagonal.
+# --- split-mode params (unchanged, kept for "vertical"/"diagonal") ---------
+if SPLIT_MODE == "vertical":
+    CANVAS_W, CANVAS_H = 2100, 1100
+elif SPLIT_MODE == "diagonal":
+    CANVAS_W, CANVAS_H = 2100, 1300
+else:
+    CANVAS_W, CANVAS_H = None, None   # set dynamically in main()
+
+if SPLIT_MODE == "vertical":
+    MAC_ANCHOR, WIN_ANCHOR = "left", "right"
+elif SPLIT_MODE == "diagonal":
+    MAC_ANCHOR, WIN_ANCHOR = "topleft", "bottomright"
+else:
+    MAC_ANCHOR, WIN_ANCHOR = None, None
+
+# Seam params (used for split modes only)
 SEAM_GAP = 6
-
-# Accent line drawn on top of the diagonal seam
 ACCENT_RGB = (255, 106, 26)   # flame-500
 ACCENT_WIDTH = 3
 ACCENT_GLOW_BLUR = 18
@@ -53,6 +70,52 @@ LOGO_ALPHA = 235  # 0-255
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def fit_height(img, target_h):
+    """Resize preserving aspect ratio so the image height matches target_h."""
+    ratio = target_h / img.height
+    new_w = int(round(img.width * ratio))
+    return img.resize((new_w, target_h), Image.Resampling.LANCZOS)
+
+
+def rounded_mask(size, radius):
+    w, h = size
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).rounded_rectangle(
+        (0, 0, w - 1, h - 1), radius=radius, fill=255,
+    )
+    return mask
+
+
+def apply_rounded_corners(img, radius):
+    mask = rounded_mask(img.size, radius)
+    rounded = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    rounded.paste(img, (0, 0), mask=mask)
+    return rounded
+
+
+def screenshot_with_shadow(img, radius, shadow_blur, shadow_offset, shadow_alpha):
+    """Return a transparent canvas containing a soft shadow + rounded-corner
+    version of `img`, padded by 2*blur on each side so it composites cleanly
+    without clipping."""
+    rounded = apply_rounded_corners(img, radius)
+    pad = shadow_blur * 2
+    w, h = img.size
+    out = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
+
+    # Shadow: black silhouette of the rounded mask, blurred, alpha-capped.
+    mask = rounded_mask((w, h), radius)
+    shadow_layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    shadow_layer.putalpha(Image.eval(mask, lambda v: min(v, shadow_alpha)))
+    shadow_canvas = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
+    shadow_canvas.paste(shadow_layer, (pad, pad), shadow_layer)
+    shadow_canvas = shadow_canvas.filter(ImageFilter.GaussianBlur(shadow_blur))
+
+    ox, oy = shadow_offset
+    out.alpha_composite(shadow_canvas, (ox, oy))
+    out.alpha_composite(rounded, (pad, pad))
+    return out, pad
+
 
 def cover_resize(img, target_w, target_h, anchor="center"):
     """Scale `img` so it fully covers (target_w, target_h), then crop to that
@@ -74,6 +137,12 @@ def cover_resize(img, target_w, target_h, anchor="center"):
         left, top = new_w - target_w, new_h - target_h
     elif anchor == "bottomleft":
         left, top = 0, new_h - target_h
+    elif anchor == "left":   # horizontal-left, vertical-center
+        left = 0
+        top = (new_h - target_h) // 2
+    elif anchor == "right":  # horizontal-right, vertical-center
+        left = new_w - target_w
+        top = (new_h - target_h) // 2
     else:
         raise ValueError(f"unknown anchor: {anchor}")
 
@@ -122,13 +191,37 @@ def triangle_mask_lower_right(w, h, gap):
     return mask
 
 
-def draw_accent_line(canvas, w, h, color, width, glow_blur, glow_alpha):
-    """Draw a soft-glowing accent line along the diagonal, on top of the
-    canvas. Mutates `canvas` and returns it."""
+def half_mask_left(w, h, gap):
+    """Mask covering the left half of the canvas, leaving a gap at the centre
+    seam."""
+    seam_x = w // 2
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).rectangle([0, 0, seam_x - gap, h], fill=255)
+    return mask
+
+
+def half_mask_right(w, h, gap):
+    """Mask covering the right half of the canvas, leaving a gap at the centre
+    seam."""
+    seam_x = w // 2
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).rectangle([seam_x + gap, 0, w, h], fill=255)
+    return mask
+
+
+def draw_accent_line(canvas, w, h, color, width, glow_blur, glow_alpha,
+                     endpoints=None):
+    """Draw a soft-glowing accent line on top of the canvas.
+
+    `endpoints` is a (start, end) pair of (x, y) tuples. If omitted, draws
+    the top-right→bottom-left diagonal."""
+    if endpoints is None:
+        endpoints = [(w, 0), (0, h)]
+
     # Glow layer
     glow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     ImageDraw.Draw(glow).line(
-        [(w, 0), (0, h)],
+        endpoints,
         fill=(*color, glow_alpha),
         width=width * 4,
     )
@@ -138,7 +231,7 @@ def draw_accent_line(canvas, w, h, color, width, glow_blur, glow_alpha):
     # Sharp line on top
     sharp = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     ImageDraw.Draw(sharp).line(
-        [(w, 0), (0, h)],
+        endpoints,
         fill=(*color, 230),
         width=width,
     )
@@ -150,16 +243,54 @@ def draw_accent_line(canvas, w, h, color, width, glow_blur, glow_alpha):
 # Main
 # ---------------------------------------------------------------------------
 
-def main():
-    mac = Image.open(MAC_SRC).convert("RGBA")
-    win = Image.open(WIN_SRC).convert("RGBA")
-    logo = Image.open(LOGO_SRC).convert("RGBA")
+def compose_sidebyside(mac, win):
+    """Two complete app windows side-by-side, vertically centred, with
+    rounded corners and a soft drop shadow under each."""
+    mac = fit_height(mac, SBS_WINDOW_HEIGHT)
+    win = fit_height(win, SBS_WINDOW_HEIGHT)
 
+    mac_card, pad = screenshot_with_shadow(
+        mac, SBS_CORNER_RADIUS, SBS_SHADOW_BLUR, SBS_SHADOW_OFFSET, SBS_SHADOW_ALPHA,
+    )
+    win_card, _ = screenshot_with_shadow(
+        win, SBS_CORNER_RADIUS, SBS_SHADOW_BLUR, SBS_SHADOW_OFFSET, SBS_SHADOW_ALPHA,
+    )
+
+    # Effective widths/heights INCLUDE shadow padding (`pad` per side).
+    # When placing, subtract `pad` so the window content sits where we expect.
+    canvas_w = (
+        SBS_SIDE_MARGIN + mac.width + SBS_GAP + win.width + SBS_SIDE_MARGIN
+    )
+    canvas_h = SBS_WINDOW_HEIGHT + SBS_TOP_MARGIN * 2
+
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (0, 0, 0, 0))
+
+    # Mac on the left
+    mac_x = SBS_SIDE_MARGIN - pad
+    mac_y = SBS_TOP_MARGIN - pad + (SBS_WINDOW_HEIGHT - mac.height) // 2
+    canvas.alpha_composite(mac_card, (mac_x, mac_y))
+
+    # Windows on the right
+    win_x = SBS_SIDE_MARGIN + mac.width + SBS_GAP - pad
+    win_y = SBS_TOP_MARGIN - pad + (SBS_WINDOW_HEIGHT - win.height) // 2
+    canvas.alpha_composite(win_card, (win_x, win_y))
+
+    return canvas
+
+
+def compose_split(mac, win):
+    """Diagonal or vertical split-screen mode."""
     mac_fit = cover_resize(mac, CANVAS_W, CANVAS_H, anchor=MAC_ANCHOR)
     win_fit = cover_resize(win, CANVAS_W, CANVAS_H, anchor=WIN_ANCHOR)
 
-    mac_mask = triangle_mask_upper_left(CANVAS_W, CANVAS_H, SEAM_GAP)
-    win_mask = triangle_mask_lower_right(CANVAS_W, CANVAS_H, SEAM_GAP)
+    if SPLIT_MODE == "vertical":
+        mac_mask = half_mask_left(CANVAS_W, CANVAS_H, SEAM_GAP)
+        win_mask = half_mask_right(CANVAS_W, CANVAS_H, SEAM_GAP)
+        seam_endpoints = [(CANVAS_W // 2, 0), (CANVAS_W // 2, CANVAS_H)]
+    else:
+        mac_mask = triangle_mask_upper_left(CANVAS_W, CANVAS_H, SEAM_GAP)
+        win_mask = triangle_mask_lower_right(CANVAS_W, CANVAS_H, SEAM_GAP)
+        seam_endpoints = [(CANVAS_W, 0), (0, CANVAS_H)]
 
     canvas = Image.new("RGBA", (CANVAS_W, CANVAS_H), (0, 0, 0, 0))
     canvas.paste(mac_fit, (0, 0), mac_mask)
@@ -168,7 +299,20 @@ def main():
     draw_accent_line(
         canvas, CANVAS_W, CANVAS_H,
         ACCENT_RGB, ACCENT_WIDTH, ACCENT_GLOW_BLUR, ACCENT_GLOW_ALPHA,
+        endpoints=seam_endpoints,
     )
+    return canvas
+
+
+def main():
+    mac = Image.open(MAC_SRC).convert("RGBA")
+    win = Image.open(WIN_SRC).convert("RGBA")
+    logo = Image.open(LOGO_SRC).convert("RGBA")
+
+    if SPLIT_MODE == "sidebyside":
+        canvas = compose_sidebyside(mac, win)
+    else:
+        canvas = compose_split(mac, win)
 
     if ENABLE_LOGO:
         # Logo overlay (transparent watermark, top-left)
