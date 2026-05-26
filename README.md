@@ -29,6 +29,20 @@ Then visit `http://localhost:8000`.
 
 All assets live in `/assets/`. The hero composite, feature GIFs, logo, OG image, favicon, and workflow icons are wired in. Missing images degrade gracefully via `onerror` fallbacks, so swapping in new images is safe.
 
+### Regenerating WebP variants of images
+
+The hero PNG and feature GIFs are converted to WebP for a ~6× page-weight reduction. After swapping a source asset, re-run:
+
+```powershell
+py tools/optimize_assets.py
+```
+
+This reads `assets/hero-platforms.png` + `assets/stagehand-*-large.gif` and writes matching `.webp` files. The site HTML references the `.webp` versions; originals stay on disk as source-archive copies.
+
+### SEO checklist
+
+[`SEO.md`](SEO.md) tracks what's done in code (JSON-LD schemas, sitemap, robots.txt, OG tags, image optimisation) and what's left for off-page work (listings, community posts, content marketing).
+
 ### Regenerating the hero composite
 
 The hero image (`assets/hero-platforms.png`) is built from `tools/sources/stagehand-mac.png` + `tools/sources/stagehand-windows.png` + `assets/logo-mark.png` by a small Pillow script. To rebuild after swapping a source screenshot:
@@ -95,8 +109,13 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 │       └── tagging.jpg
 ├── tools/
 │   ├── compose_hero.py         # regenerate assets/hero-platforms.png from sources
+│   ├── optimize_assets.py      # convert hero PNG + feature GIFs to WebP
+│   ├── release-notes-v0.4.0-beta.md  # template for future release notes
 │   └── sources/                # raw Mac/Windows screenshots used by the composer
 │       ├── stagehand-mac.png
 │       └── stagehand-windows.png
+├── robots.txt                  # crawler directives + sitemap pointer
+├── sitemap.xml                 # 1-URL sitemap with image extension
+├── SEO.md                      # what's done in code + checklist of off-page TODOs
 └── README.md                   # this file
 ```

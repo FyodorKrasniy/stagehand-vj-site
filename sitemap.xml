@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://stagehandvj.com/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://stagehandvj.com/assets/hero-platforms.webp</image:loc>
+      <image:title>Stagehand VJ — Mac and Windows clip library manager</image:title>
+      <image:caption>Stagehand VJ running on macOS and Windows, showing the clip library and Resolume load panel.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://stagehandvj.com/assets/og-image.png</image:loc>
+      <image:title>Stagehand VJ</image:title>
+    </image:image>
+  </url>
+</urlset>
