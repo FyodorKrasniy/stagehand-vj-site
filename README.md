@@ -55,7 +55,7 @@ Layout knobs (canvas size, screenshot widths, rotations, positions, shadows, log
 
 ## Live wiring
 
-- **Downloads** → GitHub release `v0.4.0-beta` on `FyodorKrasniy/stagehand-vj`. Three assets (`StagehandVJ-Beta-WinSetup_r34.exe`, `StagehandVJ-Beta-arm-x64.zip`, `StagehandVJ-Beta-osx-x64.zip`). Same binary runs as the free demo or licence-unlocked. Buttons use the GitHub `releases/latest/download/` alias — **keep filenames stable across releases** or the site links will 404. To bump the Windows version suffix in the future, either rename the file before uploading or update the site links to match.
+- **Downloads** → GitHub release `v0.4.1-beta` on `FyodorKrasniy/stagehand-vj`. Three assets (`StagehandVJ-Beta-WinSetup_r35.exe`, `StagehandVJ-Beta-arm-x64_r35.zip`, `StagehandVJ-Beta-osx-x64_r35.zip`). Same binary runs as the free demo or licence-unlocked. Buttons use the GitHub `releases/latest/download/` alias — filenames carry the `_rNN` build suffix, so each release the three URLs in `index.html` need updating to match (search for `releases/latest/download/StagehandVJ`).
 - **Beta licence checkout** → Lemon Squeezy product `452521b6-782a-4d64-b89a-cb43312098ce`. To change, search the file for `lemonsqueezy.com/checkout/buy/` and swap the URL.
 - **Email signup** → Formspree form `mnjwldzb` (search for that string to replace).
 - **Price** is set to `$25 AUD` in four places (nav, hero secondary button, pricing card, pricing card button). Search for `$25 AUD` and `$25</span>` to swap.
@@ -110,7 +110,8 @@ At that point, scaffold an Astro project and port the index in an afternoon — 
 ├── tools/
 │   ├── compose_hero.py         # regenerate assets/hero-platforms.png from sources
 │   ├── optimize_assets.py      # convert hero PNG + feature GIFs to WebP
-│   ├── release-notes-v0.4.0-beta.md  # template for future release notes
+│   ├── release-notes-v0.4.0-beta.md  # archive: notes for v0.4.0-beta (r34)
+│   ├── release-notes-v0.4.1-beta.md  # archive: notes for v0.4.1-beta (r35)
 │   └── sources/                # raw Mac/Windows screenshots used by the composer
 │       ├── stagehand-mac.png
 │       └── stagehand-windows.png
