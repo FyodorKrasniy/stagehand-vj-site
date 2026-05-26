@@ -41,7 +41,7 @@ Layout knobs (canvas size, screenshot widths, rotations, positions, shadows, log
 
 ## Live wiring
 
-- **Demo download** → GitHub release `v0.3.0-demo` (`StagehandVJ-Demo.exe`, Windows). Buttons use the GitHub "latest" alias so future demo releases auto-pick up.
+- **Downloads** → GitHub release `v0.4.0-beta` on `FyodorKrasniy/stagehand-vj`. Three assets (`StagehandVJ-Beta-WinSetup_r34.exe`, `StagehandVJ-Beta-arm-x64.zip`, `StagehandVJ-Beta-osx-x64.zip`). Same binary runs as the free demo or licence-unlocked. Buttons use the GitHub `releases/latest/download/` alias — **keep filenames stable across releases** or the site links will 404. To bump the Windows version suffix in the future, either rename the file before uploading or update the site links to match.
 - **Beta licence checkout** → Lemon Squeezy product `452521b6-782a-4d64-b89a-cb43312098ce`. To change, search the file for `lemonsqueezy.com/checkout/buy/` and swap the URL.
 - **Email signup** → Formspree form `mnjwldzb` (search for that string to replace).
 - **Price** is set to `$25 AUD` in four places (nav, hero secondary button, pricing card, pricing card button). Search for `$25 AUD` and `$25</span>` to swap.
