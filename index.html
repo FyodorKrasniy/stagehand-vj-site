@@ -50,7 +50,7 @@
         "description": "A clip library manager and metadata tool for Resolume-based VJ workflows. Tag, search, preview, and hand off clips to Resolume via drag-and-drop or REST. Local-first, cross-platform, signed and notarized.",
         "url": "https://stagehandvj.com/",
         "downloadUrl": "https://github.com/FyodorKrasniy/stagehand-vj/releases/latest",
-        "softwareVersion": "0.4.1-beta",
+        "softwareVersion": "0.5.0-beta",
         "image": "https://stagehandvj.com/assets/hero-platforms.webp",
         "screenshot": [
           "https://stagehandvj.com/assets/stagehand-library-picker-large.webp",
@@ -85,6 +85,9 @@
           "Named collections without duplicating files",
           "Send clips to Resolume by layer and column",
           "Portable metadata written back into files",
+          "Tag Sets — export and import tags without moving media files",
+          "Full undo across bulk and inline edits, persistent across restarts",
+          "Automatic daily library backups with in-place restore",
           "DXV codec specialisation",
           "Cross-platform: Windows + macOS"
         ]
@@ -322,6 +325,7 @@
         <a href="#features" class="hover:text-white transition">Features</a>
         <a href="#platform" class="hover:text-white transition">Platform</a>
         <a href="#pricing" class="hover:text-white transition">Pricing</a>
+        <a href="#whats-new" class="hover:text-white transition">What's New</a>
         <a href="#faq" class="hover:text-white transition">FAQ</a>
       </div>
       <div class="flex items-center gap-3">
@@ -685,21 +689,21 @@
             <li class="flex gap-3"><span class="text-white/40">·</span><span class="text-white/60">One-file-at-a-time export (no batch)</span></li>
           </ul>
           <div class="space-y-2">
-            <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/latest/download/StagehandVJ-Beta-WinSetup_r35.exe" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
+            <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/download/v0.5.0-beta/StagehandVJ-Beta-Setup-stagehand-vj-beta-2026-08-04-r47-tag-sets-deferred-writes.exe" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
               <span class="flex items-center gap-3">
                 <svg class="w-5 h-5 text-white/60" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5L10.5 4.5V11.5H3V5.5zM11.5 4.4L21 3V11.5H11.5V4.4zM3 12.5H10.5V19.5L3 18.5V12.5zM11.5 12.5H21V21L11.5 19.6V12.5z"/></svg>
                 Windows
               </span>
-              <span class="text-xs text-white/50 font-normal">.exe · ~200 MB</span>
+              <span class="text-xs text-white/50 font-normal">.exe · r47 · ~200 MB</span>
             </a>
-            <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/latest/download/StagehandVJ-Beta-arm-x64_r35.zip" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
+            <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/download/v0.4.1-beta/StagehandVJ-Beta-arm-x64_r35.zip" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
               <span class="flex items-center gap-3">
                 <svg class="w-5 h-5 text-white/60" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
                 Mac · Apple Silicon
               </span>
               <span class="text-xs text-white/50 font-normal">.zip · ~105 MB</span>
             </a>
-            <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/latest/download/StagehandVJ-Beta-osx-x64_r35.zip" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
+            <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/download/v0.4.1-beta/StagehandVJ-Beta-osx-x64_r35.zip" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
               <span class="flex items-center gap-3">
                 <svg class="w-5 h-5 text-white/60" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
                 Mac · Intel
@@ -707,7 +711,7 @@
               <span class="text-xs text-white/50 font-normal">.zip · ~105 MB</span>
             </a>
           </div>
-          <p class="text-xs text-white/40 mt-3 text-center">Signed &amp; notarized · clips not included</p>
+          <p class="text-xs text-white/40 mt-3 text-center">Signed &amp; notarized · clips not included · Windows on r47, Mac on r35</p>
         </div>
 
         <!-- Beta access card -->
@@ -733,36 +737,53 @@
           <p class="text-xs text-white/40 mt-3 text-center">Secure checkout by Lemon Squeezy · Win + Mac bundled</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- ===== EXPERIMENTAL / UNSTABLE BUILD ===== -->
-      <div id="experimental" class="max-w-4xl mx-auto mt-6">
-        <div class="card rounded-2xl p-8" style="border-color: rgba(255,106,26,0.35); border-style: dashed;">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-            <div class="md:max-w-md">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="badge">Latest release · Unstable</span>
-                <span class="text-xs text-white/40 font-mono">r39 · Windows only</span>
-              </div>
-              <h3 class="text-2xl font-extrabold text-white mb-2">Experimental build</h3>
-              <p class="text-white/60 text-sm leading-relaxed mb-4">An early build with the newest features, ahead of the stable channel. Possibly unstable — for testing. For day-to-day use, grab the stable demo or licence above (<span class="font-mono text-white/70">r35</span>).</p>
-              <ul class="space-y-2.5 text-sm text-white/80">
-                <li class="flex gap-2.5"><span class="check">✓</span> <span><strong class="text-white">Format / codec sorting</strong> — new Format column to sort and group clips by codec</span></li>
-                <li class="flex gap-2.5"><span class="check">✓</span> <span><strong class="text-white">Show unrendered clips</strong> — toggle via <span class="font-mono text-white/85">View → Show Unrendered</span> to surface clips that aren't rendered yet</span></li>
-              </ul>
-            </div>
-            <div class="md:w-64 md:flex-shrink-0">
-              <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/download/v0.4.2-beta-experimental/StagehandVJ-Beta-Setup-stagehand-vj-beta-2026-05-26-r39-format-column-and-unrendered.exe" class="btn-ghost flex items-center justify-between gap-3 py-3 px-4 rounded-lg text-white font-semibold">
-                <span class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-white/60" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5L10.5 4.5V11.5H3V5.5zM11.5 4.4L21 3V11.5H11.5V4.4zM3 12.5H10.5V19.5L3 18.5V12.5zM11.5 12.5H21V21L11.5 19.6V12.5z"/></svg>
-                  Windows
-                </span>
-                <span class="text-xs text-white/50 font-normal">.exe · ~200 MB</span>
-              </a>
-              <p class="text-xs text-white/40 mt-3 text-center md:text-right">Pre-release · no Mac build · expect rough edges</p>
-            </div>
-          </div>
+  <!-- ============ WHAT'S NEW (r47) ============ -->
+  <section id="whats-new" class="py-20 md:py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="badge mb-4">What's New</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Beta r47 — Tag Sets, Undo &amp; Backups</h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-lg">The biggest beta update yet. Everything below is live in the current Windows build (4 Aug 2026). Just run the installer over your existing beta — library, tags, settings, and licence carry across.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Tag Sets — share tags, not media</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Export tags, ratings, artist/year/comments, and collections for any selection into a tiny <span class="font-mono text-white/80">.stagehandtags</span> file — no video inside. A friend imports it against their own clip pack; Stagehand matches by filename, duration, and resolution, shows a review, and writes nothing until they confirm. Additive by default.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Undo — everywhere, at last</h3>
+          <p class="text-white/60 text-sm leading-relaxed"><span class="font-mono text-white/80">Ctrl+Z</span> now covers bulk <em>and</em> inline edits: removes, bulk tag/rating, folder &amp; collection deletes, metadata and tag-set imports, single stars, inline artist/year/tags/comments. Bursts merge into one step, and undo survives an app restart — the last 20 operations live in the database.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Automatic backups + Restore</h3>
+          <p class="text-white/60 text-sm leading-relaxed">A library snapshot is taken once a day and before every import. <span class="font-mono text-white/80">File → Restore from Backup…</span> lists every snapshot with date, reason, and clip count, and restores in place — no restart. A pre-restore snapshot is taken first, so even a restore is reversible. Last 10 kept.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Edits save instantly, files on your say-so</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Tag and rating edits now save to the database immediately and no longer touch your media files automatically. An amber status-bar counter shows <span class="font-mono text-white/80">"N not written to files"</span> — click to filter the pending clips, hit <span class="font-mono text-white/80">write now</span> to flush them. Prefer the old cascade? One preference turns it back on.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Safer deletes &amp; folder hygiene</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Remove Selected has a real confirm dialog, and "also delete from drive" now sends files to the <strong class="text-white">Recycle Bin</strong> instead of hard-deleting. <span class="font-mono text-white/80">Watched Folders…</span> lists everything scanned and lets you exclude folders. <span class="font-mono text-white/80">Alt+click</span> a tag to exclude it from results.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Noticeably faster on relaunch</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Format and resolution are remembered in the database — the second launch shows them instantly instead of re-probing every clip with ffprobe. Thumbnails generate two-at-a-time on a cold cache, and operations that waited on a sleeping external drive now run in the background.</p>
         </div>
       </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <a href="#download" class="btn-primary px-6 py-3 rounded-lg inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+          Download r47 (Windows)
+        </a>
+        <a href="https://github.com/FyodorKrasniy/stagehand-vj/releases/tag/v0.5.0-beta" class="btn-ghost px-6 py-3 rounded-lg text-white">Full release notes</a>
+      </div>
+      <p class="text-xs text-white/40 mt-4 text-center">Windows build. macOS r47 is in the works — Mac users stay on the stable r35 build above for now.</p>
     </div>
   </section>
 

@@ -55,8 +55,13 @@ Layout knobs (canvas size, screenshot widths, rotations, positions, shadows, log
 
 ## Live wiring
 
-- **Downloads** → GitHub release `v0.4.1-beta` on `FyodorKrasniy/stagehand-vj`. Three assets (`StagehandVJ-Beta-WinSetup_r35.exe`, `StagehandVJ-Beta-arm-x64_r35.zip`, `StagehandVJ-Beta-osx-x64_r35.zip`). Same binary runs as the free demo or licence-unlocked. Buttons use the GitHub `releases/latest/download/` alias — filenames carry the `_rNN` build suffix, so each release the three URLs in `index.html` need updating to match (search for `releases/latest/download/StagehandVJ`).
-- **Experimental build** → GitHub *pre-release* `v0.4.2-beta-experimental` (r39, Windows-only). Surfaced in the `#experimental` callout below the pricing cards, labelled "Latest release · Unstable". Linked by its **specific tag URL** (not the `latest` alias) on purpose, so it never displaces the stable r35 download. Because it's flagged pre-release, `releases/latest/` keeps resolving to r35. To retire or roll forward, update the single `releases/download/v0.4.2-beta-experimental/...` URL in `index.html` (search for `#experimental` / `beta-experimental`).
+- **Downloads** → split across two GitHub releases on `FyodorKrasniy/stagehand-vj`, because the current build is Windows-only:
+  - **Windows** → release `v0.5.0-beta` (r47), asset `StagehandVJ-Beta-Setup-stagehand-vj-beta-2026-08-04-r47-tag-sets-deferred-writes.exe`. This is the `latest` release on GitHub.
+  - **Mac (Apple Silicon + Intel)** → still release `v0.4.1-beta` (r35), assets `StagehandVJ-Beta-arm-x64_r35.zip` and `StagehandVJ-Beta-osx-x64_r35.zip`.
+  - All three buttons are pinned to **explicit tag URLs** (`releases/download/<tag>/…`), NOT the `releases/latest/` alias. This is deliberate: `latest` now resolves to the Windows-only r47, so a `latest`-aliased Mac link would 404. When a Mac r47 build ships, add its assets to `v0.5.0-beta` and repoint the two Mac buttons to that tag. Search `index.html` for `releases/download/` to find all three.
+  - Same binary runs as the free demo or licence-unlocked.
+- **What's New section** (`#whats-new`) → static summary of the r47 release (Tag Sets, Undo, backups, deferred writes, safer deletes, perf), with a "Full release notes" link to `releases/tag/v0.5.0-beta`. Update this block and the JSON-LD `softwareVersion` + `featureList` when a new headline release lands.
+- **Retired:** the old r39 `#experimental` callout was removed when r47 superseded it. Its GitHub *pre-release* `v0.4.2-beta-experimental` still exists but is no longer linked from the site.
 - **Beta licence checkout** → Lemon Squeezy product `452521b6-782a-4d64-b89a-cb43312098ce`. To change, search the file for `lemonsqueezy.com/checkout/buy/` and swap the URL.
 - **Email signup** → Formspree form `mnjwldzb` (search for that string to replace).
 - **Price** is set to `$25 AUD` in four places (nav, hero secondary button, pricing card, pricing card button). Search for `$25 AUD` and `$25</span>` to swap.
