@@ -83,6 +83,7 @@
           "Multi-field search across filename, tags, collections, codec",
           "Inline video playback with alpha checkerboard and loop",
           "Named collections without duplicating files",
+          "Nested folders with drag-and-drop and subfolders for organising clips",
           "Send clips to Resolume by layer and column",
           "Portable metadata written back into files",
           "Tag Sets — export and import tags without moving media files",
@@ -745,7 +746,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-14">
         <span class="badge mb-4">What's New</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Beta r47 — Tag Sets, Undo &amp; Backups</h2>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Beta r47 — Folders, Tag Sets, Undo &amp; Backups</h2>
         <p class="text-white/60 max-w-2xl mx-auto text-lg">The biggest beta update yet. Everything below is live in the current Windows build (4 Aug 2026). Just run the installer over your existing beta — library, tags, settings, and licence carry across.</p>
       </div>
 
@@ -753,6 +754,10 @@
         <div class="card rounded-xl p-6">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Tag Sets — share tags, not media</h3>
           <p class="text-white/60 text-sm leading-relaxed">Export tags, ratings, artist/year/comments, and collections for any selection into a tiny <span class="font-mono text-white/80">.stagehandtags</span> file — no video inside. A friend imports it against their own clip pack; Stagehand matches by filename, duration, and resolution, shows a review, and writes nothing until they confirm. Additive by default.</p>
+        </div>
+        <div class="card rounded-xl p-6">
+          <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Folders — organise beyond tags</h3>
+          <p class="text-white/60 text-sm leading-relaxed">A proper nested folder tree, sitting right alongside tags and collections. Drag clips into folders, nest subfolders as deep as you like, and rename them freely. For when you want real structure over your library — not just tagging and collections — and want to arrange things the way you'd arrange a drive.</p>
         </div>
         <div class="card rounded-xl p-6">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Undo — everywhere, at last</h3>
@@ -772,7 +777,7 @@
         </div>
         <div class="card rounded-xl p-6">
           <h3 class="text-white font-semibold mb-2 flex items-center gap-2"><span class="dot"></span>Noticeably faster on relaunch</h3>
-          <p class="text-white/60 text-sm leading-relaxed">Format and resolution are remembered in the database — the second launch shows them instantly instead of re-probing every clip with ffprobe. Thumbnails generate two-at-a-time on a cold cache, and operations that waited on a sleeping external drive now run in the background.</p>
+          <p class="text-white/60 text-sm leading-relaxed">Format and resolution are remembered in the database — the second launch shows them instantly instead of re-probing every clip with ffprobe. Thumbnails generate two-at-a-time on a cold cache, and a failing or corrupted file no longer stalls a batch: it's skipped after a timeout and logged, so a bad clip can't freeze an export.</p>
         </div>
       </div>
 
